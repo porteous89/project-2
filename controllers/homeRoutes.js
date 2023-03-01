@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const{ Movie } = require('../../models');
 
+//route to get all movies
 router.get("/", async (req, res) => {
  try{
     const movieData = await Movie.findAll({
@@ -17,6 +18,7 @@ router.get("/", async (req, res) => {
  }
 });
 
+//route to edit a movie
 router.get("/movie/:id", async (req, res) => { 
 try {
     const movieData = await Movie.findByPk(req.params.id, {
@@ -39,6 +41,7 @@ try {
 }
 });
 
+// checks to see if user is logged in. If they are, they are redirected to the homepage. If not, they are redirected to the login page. to prevent users who are already logged in from accessing login page again, and display login to users who are not logged in.
 router.get("/login", (req, res) => {
     if (req.session.loggedIn) {
         res.redirect("/");
@@ -47,6 +50,7 @@ router.get("/login", (req, res) => {
     res.render("login");
 });
 
+//if not signed in, will render signup page. If signed in, will redirect to homepage.
 router.get("/signup", (req, res) => {
     if (req.session.loggedIn) {
         res.redirect("/");

@@ -3,9 +3,9 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 
 class User extends Model {
-    // checkPassword(loginPW) {
-        // return bcrypt.compareSync(loginPw, this.password);
-        // }
+    checkPassword(loginPW) {
+        return bcrypt.compareSync(loginPw, this.password);
+        }
     }
 
 
@@ -39,7 +39,7 @@ User.init (
             validate: {
                 len: [8],
             }
-        }
+        },
     },
     {
         sequelize,

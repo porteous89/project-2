@@ -14,6 +14,7 @@ Comment.init (
         movie_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            foreignKey: true,
             references: {
                 model: 'movie',
                 key: 'id',
@@ -22,6 +23,7 @@ Comment.init (
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            foreignKey: true,
             references: {
                 model: 'user',
                 key: 'id',

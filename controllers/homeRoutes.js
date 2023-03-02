@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const{ Movie } = require('../../models');
+const{ Movie } = require('../models');
 
 //route to get all movies
 router.get("/", async (req, res) => {

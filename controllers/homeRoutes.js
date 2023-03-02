@@ -5,13 +5,13 @@ const{ Movie, User, Comment } = require('../models');
 router.get("/", async (req, res) => {
  try{
     const movieData = await Movie.findAll({
-        where: {
-            id: req.session.id,
-        },
+   
     });
     const movies = movieData.map((movie) => movie.get({ plain: true }));
+    console.log(movies)
     res.render("homepage", {
         movies,
+        logged_in: req.session.loggedIn
     });
  } catch (err) {
     console.log(err)

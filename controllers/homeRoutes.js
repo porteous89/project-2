@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const{ Movie } = require('../models');
+const{ Movie, User, Comment } = require('../models');
 
 //route to get all movies
 router.get("/", async (req, res) => {
  try{
     const movieData = await Movie.findAll({
         where: {
-            user_id: req.session.user_id,
+            id: req.session.id,
         },
     });
     const movies = movieData.map((movie) => movie.get({ plain: true }));
@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
         movies,
     });
  } catch (err) {
+    console.log(err)
     res.status(500).json(err);
  }
 });
@@ -26,7 +27,7 @@ try {
             User,
             {
                 model: Comment,
-                include: [User]
+                include: ["user_id"]
             }
         ]
     })
@@ -37,6 +38,7 @@ try {
         res.status(404).end();
     }
 } catch (err) {
+    console.log(err)
     res.status(500).json(err);
 }
 });

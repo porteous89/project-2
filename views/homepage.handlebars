@@ -1,1 +1,11 @@
 <h1>HomePage</h1>
+{{#each comments as |comment|}}
+    <div class="comment">
+        <h3>{{comment.feedback}}</h3>
+        <p>{{movie.name}}</p>
+        <p>{{user.username}}</p>
+        <p>{{comment.movie_id}}</p>
+    </div>
+{{/each}}
+
+{{! Path: controllers\home.js }}

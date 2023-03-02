@@ -1,26 +1,32 @@
 const router = require("express").Router();
-const { User, Comment } = require("../../models/");
+const { User, Comment, Movie } = require("../../models/");
 const withAuth = require("../../utils/auth");
 
 //GET all comments
 router.get("/", async (req, res) => {
     try {
         const commentData = await Comment.findAll({
-            where: {
-                user_id: req.session.user_id,
-            },
+            // where: {
+            //     user_id: req.session.user_id,
+            // },
 
             include: [
                 { 
-                    model: User 
-                }
+                    model: User,
+                    attributes: ["username"]
+                },
+            {
+                model: Movie,
+                attributes: ["name"]
+            }
             ],
         });
         const comments = commentData.map((comment) => comment.get({ plain: true }));
-        res.render("dashboard", { 
+        res.render("homepage", { 
             comments,
-            loggedIn: true });
+            loggedIn: req.session.loggedIn, });
     } catch (err) {
+        console.log(err)
         res.status(500).json(err);
     }
 });

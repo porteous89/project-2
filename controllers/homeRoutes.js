@@ -24,16 +24,14 @@ router.get("/movie/:id", async (req, res) => {
 try {
     const movieData = await Movie.findByPk(req.params.id, {
         include: [
-            User,
             {
-                model: Comment,
-                include: ["user_id"]
-            }
+                model: Comment, as : "movie comments",
+            },
         ]
     })
     if(movieData) {
      const movie = movieData.get({ plain: true });
-     res.render("movies", { movie});
+     res.render("homepage", { movie});
     } else {
         res.status(404).end();
     }

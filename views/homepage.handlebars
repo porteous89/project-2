@@ -1,16 +1,33 @@
-<h1>HomePage</h1>
-{{#each comments as |comment|}}
-    <div class="comment">
-        <h3>{{comment.feedback}}</h3>
-        <p>{{movie.name}}</p>
-        <p>{{user.username}}</p>
-        <p>{{comment.movie_id}}</p>
-    </div>
+<!-- loop over each movie in the array -->
+	<div class="hero-container row">
+{{#each movies as |movie|}}
+ 		<div class="main-container col-4">
+			<div class="poster-container">
+				<a href="#"><img src="{{movie.poster}}" class="poster" alt="{{movie.name}}" /></a>
+			</div>
+			<div class="ticket-container">
+				<div class="ticket__content">
+					<h4 class="ticket__movie-title">{{movie.name}}</h4>
+					<p class="ticket__movie-slogan">
+						{{movie.description}}
+					</p>
+                      {{#if logged_in}}
+					<span class="heading">User Rating</span>
+                    <p>{{user.name}} rates this movie:</p>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<hr style="border:3px solid #f1f1f1">
+<input type="text" id="comment-box" placeholder="Enter comment">
+<button id="post">Post</button>
+<ul id="unordered"></ul>  
+    {{/if}}  
+				</div>
+			</div>
+		</div>
 {{/each}}
-    <div class="comment">
-        {{movie.poster}}
-        <img src="{{movie.poster}}">
-        <p>{{movie.rating}}</p>
-        <p>{{movie.name}}</p>
-    </div>
+</div> 
+
 {{! Path: controllers\home.js }}

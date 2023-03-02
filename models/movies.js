@@ -1,4 +1,4 @@
-const sequelize = require('../config'); //connect later
+const sequelize = require('../config/connection'); 
 const { Model, DataTypes } = require('sequelize');
 
 class Movie extends Model {}
@@ -14,6 +14,10 @@ Movie.init (
         name: {
             type: DataTypes.STRING,
             allowNull: false, 
+        },
+        poster: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         genre: {
             type: DataTypes.STRING,

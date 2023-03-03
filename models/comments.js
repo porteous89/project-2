@@ -29,6 +29,10 @@ Comment.init (
                 key: 'id',
             }
         },
+        rating: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         feedback: {
             type: DataTypes.TEXT,
             allowNull: false,

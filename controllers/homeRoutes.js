@@ -53,6 +53,17 @@ router.get("/login", (req, res) => {
     res.render("login");
 });
 
+router.get("/profile", async (req, res) => {
+    try {
+        const userData = await User.findByPk( req.session.user_id );
+        const user = userData.get({ plain: true });
+        res.render('profile', { user });
+    } catch (err) {
+        console.log(chalk.bgRed(err));
+        res.status(500).json(err);
+    }
+});
+
 //if not signed in, will render signup page. If signed in, will redirect to homepage.
 router.get("/login", (req, res) => {
     if (req.session.loggedIn) {

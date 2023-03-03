@@ -1,27 +1,27 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 const chalk = require('chalk');
-new chalk.Instance({level: 3});
+new chalk.Instance({ level: 3 });
 
 router.post("/", async (req, res) => {
     try {
         const newUser = await User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-    })
-            req.session.save(() => {
-                req.session.user_id = newUser.id;
-                req.session.username = newUser.username;
-                req.session.loggedIn = true;
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+        })
+        req.session.save(() => {
+            req.session.user_id = newUser.id;
+            req.session.username = newUser.username;
+            req.session.loggedIn = true;
 
-                res.json(newUser);
-            });
-            console.log(chalk.bgGreen(newUser));
-        } catch(err) {
-            console.log(chalk.bgRed(err));
-            res.status(500).json(err);
-        };
+            res.json(newUser);
+        });
+        console.log(chalk.bgGreen(newUser));
+    } catch (err) {
+        console.log(chalk.bgRed(err));
+        res.status(500).json(err);
+    };
 });
 
 //get all comments for a single user
@@ -55,7 +55,7 @@ router.get("/:id/comments", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     try {
-        const userdata = await  User.findOne({
+        const userdata = await User.findOne({
             where: {
                 email: req.body.email
             }
@@ -76,7 +76,7 @@ router.post("/login", async (req, res) => {
 
         req.session.save(() => {
             req.session.user_id = userdata.id;
-            
+
             req.session.loggedIn = true;
 
             res.json({ userdata, message: 'You are now logged in!' });
@@ -84,8 +84,8 @@ router.post("/login", async (req, res) => {
     } catch (err) {
         console.log(chalk.bgYellow(err));
         res.status(400).json(err);
-    }  
-    });
+    }
+});
 
 
 router.post("/logout", (req, res) => {

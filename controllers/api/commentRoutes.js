@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { User, Comment, Movie } = require("../../models/");
 const withAuth = require("../../utils/auth");
+const chalk = require("chalk");
+new chalk.Instance({ level: 3 });
 
 //GET all comments
 router.get("/", async (req, res) => {
@@ -22,11 +24,12 @@ router.get("/", async (req, res) => {
             ],
         });
         const comments = commentData.map((comment) => comment.get({ plain: true }));
+        console.log(chalk.bgGreen(comments));
         res.render("homepage", { 
             comments,
             loggedIn: req.session.loggedIn, });
     } catch (err) {
-        console.log(err)
+        console.log(chalk.bgRed(err));
         res.status(500).json(err);
     }
 });
@@ -40,7 +43,9 @@ router.get("/:id", async (req, res) => {
             return;
         }
         res.status(200).json(commentData);
+        console.log(chalk.bgGreen(commentData));
     } catch (err) {
+        console.log(chalk.bgRed(err));
         res.status(500).json(err);
     }
 });
@@ -52,8 +57,10 @@ router.post("/", withAuth, async (req, res) => {
             comment_text: req.body.comment_text,
             user_id: req.session.user_id,
         });
+        console.log(chalk.bgGreen(newComment));
         res.status(200).json(newComment);
     } catch (err) {
+        console.log(chalk.bgRed(err));
         res.status(400).json(err);
     }
 });
@@ -67,11 +74,14 @@ router.put("/:id", withAuth, async (req, res) => {
             },
         });
         if (!commentData[0]) {
+            console.log(chalk.bgYellow("No comment found with this id!"));
             res.status(404).json({ message: "No comment found with this id!" });
             return;
         }
+        console.log(chalk.bgGreen("Comment updated successfully!"));
         res.status(200).json({ message: "Comment updated successfully!" });
     } catch (err) {
+        console.log(chalk.bgRed(err));
         res.status(500).json(err);
     }
 });
@@ -85,11 +95,14 @@ router.delete("/:id", withAuth, async (req, res) => {
             },
         });
         if (!commentData) {
+            console.log(chalk.bgYellow("No comment found with this id!"));
             res.status(404).json({ message: "No comment found with this id!" });
             return;
         }
+        console.log(chalk.bgGreen("Comment deleted successfully!"));
         res.status(200).json({ message: "Comment deleted successfully!" });
     } catch (err) {
+        console.log(chalk.bgRed(err));
         res.status(500).json(err);
     }
 });

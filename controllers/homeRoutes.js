@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const{ Movie, User, Comment } = require('../models');
+const chalk = require('chalk');
+new chalk.Instance({level: 3});
 
 //route to get all movies
 router.get("/", async (req, res) => {
@@ -14,7 +16,7 @@ router.get("/", async (req, res) => {
         logged_in: req.session.loggedIn
     });
  } catch (err) {
-    console.log(err)
+    console.log(chalk.bgRed(err))
     res.status(500).json(err);
  }
 });
@@ -33,10 +35,11 @@ try {
      const movie = movieData.get({ plain: true });
      res.render("homepage", { movie});
     } else {
+        console.log(chalk.bgYellow("No movie found with this id!"));
         res.status(404).end();
     }
 } catch (err) {
-    console.log(err)
+    console.log(chalk.bgRed(err))
     res.status(500).json(err);
 }
 });

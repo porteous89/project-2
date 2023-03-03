@@ -1,4 +1,4 @@
-const avgCalc = (totalRating, ratingCount) => {
-    totalRating / ratingCount;
+const avgCalc = (totalRating, totalComments ) => {
+    totalRating / totalComments;
     return movieRating;
-}
+};

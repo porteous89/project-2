@@ -38,6 +38,14 @@ Movie.init (
         comments: {
             type: DataTypes.TEXT,
             allowNull: true,
+        },
+        totalRating: { //total rating value from all users combined
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        totalComments: { //total number of comments from all users combined
+            type: DataTypes.INTEGER,
+            allowNull: true,
         }
     },
     {

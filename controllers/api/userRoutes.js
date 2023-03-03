@@ -55,17 +55,17 @@ router.get("/:id/comments", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     try {
-        const user = await  User.findOne({
+        const userdata = await  User.findOne({
             where: {
                 email: req.body.email
             }
         });
-        if (!user) {
+        if (!userdata) {
             console.log(chalk.bgYellow("No user with that email address!"));
             res.status(400).json({ message: 'No user with that email address!' });
             return;
         }
-        const validPassword = user.checkPassword(req.body.password);
+        const validPassword = await userdata.checkPassword(req.body.password);
 
         if (!validPassword) {
             console.log(chalk.bgYellow("Incorrect password!"));
@@ -75,11 +75,11 @@ router.post("/login", async (req, res) => {
         console.log(chalk.bgGreen("You are now logged in!"));
 
         req.session.save(() => {
-            req.session.user_id = user.id;
-            req.session.username = user.username;
+            req.session.user_id = userdata.id;
+            
             req.session.loggedIn = true;
 
-            res.json({ user, message: 'You are now logged in!' });
+            res.json({ userdata, message: 'You are now logged in!' });
         });
     } catch (err) {
         console.log(chalk.bgYellow(err));

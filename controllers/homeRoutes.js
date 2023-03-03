@@ -33,7 +33,7 @@ try {
     })
     if(movieData) {
      const movie = movieData.get({ plain: true });
-     res.render("homepage", { movie});
+     res.render("homepage", { movie });
     } else {
         console.log(chalk.bgYellow("No movie found with this id!"));
         res.status(404).end();

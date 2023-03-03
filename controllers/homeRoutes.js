@@ -47,19 +47,19 @@ try {
 // checks to see if user is logged in. If they are, they are redirected to the homepage. If not, they are redirected to the login page. to prevent users who are already logged in from accessing login page again, and display login to users who are not logged in.
 router.get("/login", (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect("/");
+        res.redirect("/profile");
         return;
     } 
     res.render("login");
 });
 
 //if not signed in, will render signup page. If signed in, will redirect to homepage.
-router.get("/signup", (req, res) => {
+router.get("/login", (req, res) => {
     if (req.session.loggedIn) {
         res.redirect("/");
         return;
     }
-    res.render("signup");
+    res.render("login");
 });
 
 module.exports = router;

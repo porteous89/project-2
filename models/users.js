@@ -23,7 +23,6 @@ User.init (
         },
         location: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         email: {
             type: DataTypes.STRING,

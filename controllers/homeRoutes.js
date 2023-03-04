@@ -33,7 +33,8 @@ try {
     })
     if(movieData) {
      const movie = movieData.get({ plain: true });
-     res.render("homepage", { movie });
+     res.render("movies", { movie, logged_in: req.session.loggedIn });
+
     } else {
         console.log(chalk.bgYellow("No movie found with this id!"));
         res.status(404).end();

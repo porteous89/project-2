@@ -3,7 +3,7 @@
 {{#each movies as |movie|}}
  		<div class="main-container col-4">
 			<div class="poster-container">
-				<a href="#"><img src="{{movie.poster}}" class="poster" alt="{{movie.name}}" /></a>
+				<a href="/movie/{{movie.id}}"><img src="{{movie.poster}}" class="poster" alt="{{movie.name}}" /></a>
 			</div>
 			<div class="ticket-container">
 				<div class="ticket__content">
@@ -28,11 +28,6 @@
 			</div>
 		</div>
 {{/each}}
-<img src="{{movie.poster}}">
-<p>{{movie.name}}</p>
-<p>{{movie.description}}</p>
-<p>{{movie.rating}}</p>
-<p>{{format_date movie.year}}</p>
 
 </div> 
 

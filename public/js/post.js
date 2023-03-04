@@ -5,7 +5,8 @@ const postFormHandler = async (event) => {
     if (rating && feedback) {
         const response = await fetch('/api/comments', {
             method: 'POST',
-            body: JSON.stringify({ rating, feedback }),
+            // body: JSON.stringify({ rating, feedback, movie_id: movieId, user_id: userId }),
+            body: JSON.stringify({ rating, feedback, movie_id: movieId, user_id: userId }),
             headers: { 'Content-Type': 'application/json' },
         });
         if (response.ok) {

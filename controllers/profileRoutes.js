@@ -22,3 +22,33 @@ router.get("/", withAuth, async (req, res) => {
         res.redirect("login");
     }
 });
+
+//get all comments for a single user
+router.get('/comments/user_id/', withAuth, async (req, res) => {
+    try {
+        const commentData = await Comment.findAll({
+            where: {
+                user_id: req.session.user_id,
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Movie,
+                    attributes: ['name'],
+                },
+            ],
+        });
+        const comments = commentData.map((comment) => comment.get({ plain: true }));
+        console.log(chalk.bgGreen(comments));
+        res.render('profile', {
+            comments,
+            loggedIn: req.session.loggedIn,
+        });
+    } catch (err) {
+        console.log(chalk.bgRed(err));
+        res.status(500).json(err);
+    }
+});

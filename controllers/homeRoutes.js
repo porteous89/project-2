@@ -21,17 +21,25 @@ router.get("/", async (req, res) => {
  }
 });
 
-//route to edit a movie
+//route to get a movie with all comments and username
 router.get("/movie/:id", async (req, res) => { 
 try {
     const movieData = await Movie.findByPk(req.params.id, {
         include: [
+             
             {
-                model: Comment, as : "movie comments",
+                model: Comment, as : "movieComments",
+                attributes: ["id", "feedback", "rating", "user_id"],
+                include: {
+                    model: User,
+                    attributes: ["username"]
+                }
             },
+          
         ]
     })
     if(movieData) {
+        console.table(movieData)
      const movie = movieData.get({ plain: true });
      res.render("movies", { movie, logged_in: req.session.loggedIn });
 

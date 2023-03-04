@@ -39,7 +39,6 @@ try {
         ]
     })
     if(movieData) {
-        console.table(movieData)
      const movie = movieData.get({ plain: true });
      res.render("movies", { movie, logged_in: req.session.loggedIn });
 
@@ -74,13 +73,13 @@ router.get("/profile", async (req, res) => {
 });
 
 //if not signed in, will render signup page. If signed in, will redirect to homepage.
-router.get("/login", (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect("/");
-        return;
-    }
-    res.render("login");
-});
+// router.get("/login", (req, res) => {
+//     if (req.session.loggedIn) {
+//         res.redirect("/");
+//         return;
+//     }
+//     res.render("login");
+// });
 
 module.exports = router;
 

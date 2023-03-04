@@ -10,9 +10,4 @@ router.use('/', homeRoutes);
 router.use('/api', apiRoutes);
 // router.use('/dashboard', dashboardRoutes);
 
-router.use((req, res) => {
-  console.log(chalk.bgRed("No route found!"));
-  res.status(404).end();
-});
-
 module.exports = router;

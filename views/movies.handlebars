@@ -1,6 +1,6 @@
 <!-- loop over each movie in the array -->
 <div class="hero-container row">
-	{{#if logged_in}}
+	<!--{{#if logged_in}}-->
 	<img src="{{movie.poster}}">
 	{{!-- <div class="ticket__content"> --}}
 		<h4 class="ticket__movie-title">{{movie.name}}</h4>
@@ -18,8 +18,10 @@
 		<form class="form post-form">
 			<input type="text" id="rating-box" placeholder="Enter rating number">
 			<input type="text" id="comment-box" placeholder="Enter comment">
+			<input type="hidden" id="movie-id" value="{{movie.id}}">
+			<input type="hidden" id="user-id" value="{{user.id}}">
+			<button id="post" type="submit">Post</button>
 		</form>
-		<button id="post">Post</button>
 		<ul id="unordered"></ul>
 
 	{{!-- <div class="ticket__content"> --}}
@@ -32,7 +34,7 @@
 		{{/each}}
 		{{!--
 	</div> --}}
-	{{else}}
+	<!--{{else}}-->
 	<a href="/login">login</a>
 	<div class="ticket-container">
 		<div class="ticket__content">
@@ -42,6 +44,6 @@
 			</p>
 		</div>
 	</div>
-	{{/if}}
+	<!--{{/if}}-->
 
-	<script src="./js/post.js"></script>
+	<script src="/js/post.js"></script>

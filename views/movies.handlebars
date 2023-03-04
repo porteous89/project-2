@@ -21,6 +21,15 @@
 		</form>
 		<button id="post">Post</button>
 		<ul id="unordered"></ul>
+
+	{{!-- <div class="ticket__content"> --}}
+		{{#each movie.movieComments}}
+		<li class="comment">
+			<p class="comment__text">User Id: {{user_id}}</p>
+			<p class="comment__author">Username: {{user.username}}</p>
+			<p class="comment__author">User Rating: {{rating}}</p>
+			<p class="comment__author">Their Comment: {{feedback}}</p>
+		{{/each}}
 		{{!--
 	</div> --}}
 	{{else}}

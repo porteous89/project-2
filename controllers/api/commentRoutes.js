@@ -51,19 +51,32 @@ router.get("/:id", async (req, res) => {
 });
 
 //POST a new comment
-router.post("/", withAuth, async (req, res) => {
+// router.post("/", withAuth, async (req, res) => {
+//     try {
+//         const newComment = await Comment.create({
+//             comment_text: req.body.comment_text,
+//             user_id: req.session.user_id,
+//         });
+//         console.log(chalk.bgGreen(newComment));
+//         res.status(200).json(newComment);
+//     } catch (err) {
+//         console.log(chalk.bgRed(err));
+//         res.status(400).json(err);
+//     }
+// });
+
+router.post('/', withAuth, async (req, res) => {
     try {
-        const newComment = await Comment.create({
-            comment_text: req.body.comment_text,
-            user_id: req.session.user_id,
-        });
-        console.log(chalk.bgGreen(newComment));
-        res.status(200).json(newComment);
+      const newComment = await Comment.create({
+        ...req.body,
+        user_id: req.session.user_id,
+      });
+  
+      res.status(200).json(newComment);
     } catch (err) {
-        console.log(chalk.bgRed(err));
-        res.status(400).json(err);
+      res.status(400).json(err);
     }
-});
+  });
 
 //PUT to update a comment
 router.put("/:id", withAuth, async (req, res) => {

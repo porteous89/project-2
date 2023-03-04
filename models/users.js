@@ -43,10 +43,11 @@ User.init (
     },
     {
         hooks: {
-            beforeBulkCreate: async (userData) => {
-                for (const user of userData) {
-                    user.password = await bcrypt.hash(user.password, 10);
-                }
+            beforeBulkCreate: (userData) => {
+                userData.forEach((user) => {
+                    console.table(user);
+                    user.dataValues.password = bcrypt.hashSync(user.password, 10);
+                })
                 return userData;
             },
             beforeCreate: async (newUserData) => {

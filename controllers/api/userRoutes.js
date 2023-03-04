@@ -1,7 +1,20 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Comment, Movie } = require('../../models');
 const chalk = require('chalk');
 new chalk.Instance({ level: 3 });
+
+//get all users
+router.get("/", async (req, res) => {
+    try {
+        const userData = await User.findAll(req.params.id, {
+            attributes: { exclude: ['password'] }
+        });
+        res.json(userData);
+    } catch (err) {
+        console.log(chalk.bgRed(err));
+        res.status(500).json(err);
+    }
+})
 
 router.post("/", async (req, res) => {
     try {
@@ -30,8 +43,8 @@ router.get("/:id/comments", async (req, res) => {
         const userData = await User.findByPk(req.params.id, {
             include: [
                 {
-                    model: Comment,
-                    attributes: ['id', 'comment_feedback', 'movie_id', 'user_id', 'created_at'],
+                    model: Comment, as : 'userComments',
+                    attributes: ['id', 'feedback', 'movie_id', 'user_id'],
                     include: {
                         model: Movie,
                         attributes: ['name'],

@@ -4,7 +4,7 @@ const Comment = require('./comments');
 
 User.hasMany(Comment, {
     foreignKey: 'user_id',
-    as : 'user comments',
+    as : 'userComments',
     onDelete: 'CASCADE',
 })
 
@@ -20,7 +20,7 @@ Comment.belongsTo(User, {
 
 Movie.hasMany(Comment, {
     foreignKey: 'movie_id',
-    as : 'movie comments',
+    as : 'movieComments',
     onDelete: 'CASCADE',
 })
 

@@ -38,4 +38,12 @@
           </div>
         </header>
       </section>
+      {{#each comments as |comment|}}
+      <div class="comment">
+        <div class="comment__content">
+          <h4 class="comment__movie-title">{{movie.name}}</h4>
+          <p class="comment__movierating">{{comment.rating}}</p>
+          <p class="comment__movie-slogan">{{comment.feedback}}</p>
+        </div>
+        {{/each}}
 </body>

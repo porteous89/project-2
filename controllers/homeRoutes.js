@@ -41,35 +41,58 @@ router.post('/', withAuth, async (req, res) => {
 router.get("/movie/:id", async (req, res) => { 
 try {
     const movieData = await Movie.findByPk(req.params.id, {
-        include: [
-             
+        attributes: {
+            include: [
+              [
+                sequelize.literal(
+                  `(SELECT AVG(rating) FROM comment WHERE comment.movie_id = movie.id)`
+                ),
+                "avg",
+              ],
+            ],
+          },
+          include: [
             {
-                model: Comment, as : "movieComments",
-                attributes: [ "id", "feedback", "rating", "user_id"  ],
+              model: Comment,
+              as: "movieComments",
+              attributes: ["id", "feedback", "rating", "user_id"],
+              include: {
+                model: User,
+                attributes: ["username"],
+              },
+            },
+            //find average rating for movie from comments
+          ],
+        });
+    //     include: [
+             
+    //         {
+    //             // model: Comment, as : "movieComments",
+    //             // attributes: [ "id", "feedback", "rating", "user_id"  ],
                 
            
-                include: {
+    //             // include: {
                 
-                    model: User,
-                    attributes: ["username"],
-                },
+    //             //     model: User,
+    //             //     attributes: ["username"],
+    //             // },
                 
-                //model: Comment, as : "movieComments",
-                //attributes: ["movie_id", "rating"],
-                //include: 
+    //             //model: Comment, as : "movieComments",
+    //             //attributes: ["movie_id", "rating"],
+    //             //include: 
                     
-                    //sequelize.literal(`(SELECT AVG(rating) FROM comment WHERE movie_id = ${req.params.id}) AS average_rating`),
+    //                 //sequelize.literal(`(SELECT AVG(rating) FROM comment WHERE movie_id = ${req.params.id}) AS average_rating`),
                     
                 
-            },
-            //find average movie rating from comments
-            // (sequelize.literal(`(SELECT AVG(rating) FROM comment WHERE movie_id = ${req.params.id}) AS average_rating`))
+    //         },
+    //         //find average movie rating from comments
+    //         // (sequelize.literal(`(SELECT AVG(rating) FROM comment WHERE movie_id = ${req.params.id}) AS average_rating`))
 
      
             
             
-        ],
-    })
+    //     ],
+    // })
     if(movieData) {
      const movie = movieData.get({ plain: true });
      res.render("movies", { movie, logged_in: req.session.loggedIn });

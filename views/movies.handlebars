@@ -2,21 +2,42 @@
 
 <div class="hero-container row">
 	<!--{{#if logged_in}}-->
-	<img src="{{movie.poster}}">
+	<img id="movie_poster" src="{{movie.poster}}" >
 	{{!-- <div class="ticket__content"> --}}
-		<h4 class="ticket__movie-title">{{movie.name}}</h4>
-		<p class="ticket__movie-slogan">
+		<h1 class="ticket__movie-title" style="text-align:center">{{movie.name}}</h1>
+    <p></p>
+		<p class="ticket__movie-slogan movie_desc">
 			{{movie.description}}
 		</p>
-		<span class="heading">User Rating</span>
-		<p>{{user.name}} rates this movie:{{average_rating}}</p>
+    <div class="cards">
+      <div class="card snake">
+        <div class="inner">
+          <h4>COMMUNITY RATING</h4>
+          <h4>{{movie.avg}}</h4>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card snake">
+        <div class="inner">
+          <h5><label class="form__label" for="rating">Rating</label>
+				<input class="form__input" type="number" id="rating" name="rating" min="0" max="10" placeholder="# 0-10"></h5>
+          <h5><label class="form__label" for="comment">Comment</label>
+				<input class="form__input" type="text" id="comment" name="comment" placeholder="Enter comment"></h5>
+        <button id="postbtn" type="submit">Post Your Review</button>
+          </div>
+        </div>
+      
+    {{!-- </div> --}}
+		{{!-- <span class="heading">User Rating</span>
+		<p>{{user.name}} rates this movie:{{movie.avg}}</p>
 		<span class="fa fa-star checked"></span>
 		<span class="fa fa-star checked"></span>
 		<span class="fa fa-star checked"></span>
 		<span class="fa fa-star checked"></span>
 		<span class="fa fa-star"></span>
-		<hr style="border:3px solid #f1f1f1">
-		<form class="form comment-form">
+		<hr style="border:3px solid #f1f1f1"> --}}
+		{{!-- <form class="form comment-form">
 			<div class="form__group">
 				<label class="form__label" for="rating">Rating</label>
 				<input class="form__input" type="number" id="rating" name="rating" min="0" max="10" placeholder="Enter rating number">
@@ -24,13 +45,13 @@
 			<div class="form__group">
 				<label class="form__label" for="comment">Comment</label>
 				<input class="form__input" type="text" id="comment" name="comment" placeholder="Enter comment">
-			</div>
+			</div> --}}
 			{{!-- <input type="text" id="rating-box" placeholder="Enter rating number">
 			<input type="text" id="comment-box" placeholder="Enter comment"> --}}
 			<input type="hidden" id="movie-id" value="{{movie.id}}">
 			<input type="hidden" id="user-id" value="{{user.id}}">
-			<button id="postbtn" type="submit">Post Your Review</button>
-		</form>
+			{{!-- <button id="postbtn" type="submit">Post Your Review</button> --}}
+		{{!-- </form> --}}
 		
 
 		<ul id="unordered"></ul>
@@ -73,6 +94,10 @@
       *:after {
         box-sizing: inherit;
       }
+      h1 {
+        text-decoration: underline;
+        color:#000000;
+      }
       .cards {
         column-count: 3;
         --gap: 50px;
@@ -90,6 +115,24 @@
         }
       }
 
+      #movie_poster {
+        width: 100%;
+        
+      }
+      .movie_desc {
+        color:rgba(224, 224, 224, 0.863);
+        font-size: 2rem;
+        font-weight: 300;
+        line-height: 1.5;
+        margin: 0;
+        border-style: dashed;
+        border-width: 3px;
+        border-color: #000000;
+        background-color: #457fb4;
+        box-shadow: 0 0 0 0.4em #457fb4, 0 0 0 0.5em #000000;
+        padding: 5px;
+
+      }
       .card {
         --yellow: #ffc600;
         --pink: #ff3f8e;

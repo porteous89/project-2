@@ -16,6 +16,7 @@ body {
 .hero-container {
 	margin: auto;
 	display: flex;
+	align-content: center;
 }
 
 .main-container {

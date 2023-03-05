@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
   try {
     const movieData = await Movie.findAll({});
     const movies = movieData.map((movie) => movie.get({ plain: true }));
-    console.log('====>>', req.session.loggedIn);
+
     res.render("homepage", {
       movies,
       logged_in: req.session.loggedIn,

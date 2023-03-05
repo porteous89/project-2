@@ -1,7 +1,7 @@
 <!-- loop over each movie in the array -->
 
 <div class="hero-container row">
-	{{#if logged_in}}
+	<!--{{#if logged_in}}-->
 	<img src="{{movie.poster}}">
 	{{!-- <div class="ticket__content"> --}}
 		<h4 class="ticket__movie-title">{{movie.name}}</h4>
@@ -32,6 +32,7 @@
 			<button id="postbtn" type="submit">Post Your Review</button>
 		</form>
 		
+
 		<ul id="unordered"></ul>
 
 	{{!-- <div class="ticket__content"> --}}
@@ -54,7 +55,7 @@
 		</div>
 		{{!--
 	</div> --}}
-	{{else}}
+	<!--{{else}}-->
 	<a href="/login">login</a>
 	<div class="ticket-container">
 		<div class="ticket__content">
@@ -64,7 +65,7 @@
 			</p>
 		</div>
 	</div>
-	{{/if}}
+	<!--{{/if}}-->
 
 <style>
       *,

@@ -50,22 +50,6 @@ router.get("/:id", async (req, res) => {
 });
 
 //POST a new comment
-// router.post("/", withAuth, async (req, res) => {
-//     try {
-//         const newComment = await Comment.create({
-//             comment_text: req.body.comment_text,
-//             user_id: req.session.user_id,
-//         });
-//         console.log(chalk.bgGreen(newComment));
-//         res.status(200).json(newComment);
-//     } catch (err) {
-//         console.log(chalk.bgRed(err));
-//         res.status(400).json(err);
-//     }
-// });
-
-
-
 router.post('/', withAuth, async (req, res) => {
     try {
       const newComment = await Comment.create({
@@ -87,6 +71,7 @@ router.put("/:id", withAuth, async (req, res) => {
         const commentData = await Comment.update(req.body, {
             where: {
                 id: req.params.id,
+                user_id: req.session.user_id,
             },
         });
         if (!commentData[0]) {
@@ -108,6 +93,7 @@ router.delete("/:id", withAuth, async (req, res) => {
         const commentData = await Comment.destroy({
             where: {
                 id: req.params.id,
+                user_id: req.session.user_id,                
             },
         });
         if (!commentData) {

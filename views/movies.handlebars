@@ -1,7 +1,7 @@
 <!-- loop over each movie in the array -->
 
 <div class="hero-container row">
-	{{#if logged_in}}
+	<!--{{#if logged_in}}-->
 	<img src="{{movie.poster}}">
 	{{!-- <div class="ticket__content"> --}}
 		<h4 class="ticket__movie-title">{{movie.name}}</h4>
@@ -9,9 +9,7 @@
 			{{movie.description}}
 		</p>
 		<span class="heading">User Rating</span>
-
 		<p>{{user.name}} rates this movie:{{average_rating}}</p>
-
 		<span class="fa fa-star checked"></span>
 		<span class="fa fa-star checked"></span>
 		<span class="fa fa-star checked"></span>
@@ -21,13 +19,11 @@
 		<form class="form comment-form">
 			<div class="form__group">
 				<label class="form__label" for="rating">Rating</label>
-
 				<input class="form__input" type="number" id="rating" name="rating" min="0" max="10" placeholder="Enter rating number">
-
 			</div>
 			<div class="form__group">
 				<label class="form__label" for="comment">Comment</label>
-				<input class="form__input" type="text" id="comment-box" name="comment" placeholder="Enter comment">
+				<input class="form__input" type="text" id="comment" name="comment" placeholder="Enter comment">
 			</div>
 			{{!-- <input type="text" id="rating-box" placeholder="Enter rating number">
 			<input type="text" id="comment-box" placeholder="Enter comment"> --}}
@@ -59,7 +55,7 @@
 		</div>
 		{{!--
 	</div> --}}
-	{{else}}
+	<!--{{else}}-->
 	<a href="/login">login</a>
 	<div class="ticket-container">
 		<div class="ticket__content">
@@ -69,7 +65,7 @@
 			</p>
 		</div>
 	</div>
-	{{/if}}
+	<!--{{/if}}-->
 
 <style>
       *,

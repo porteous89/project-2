@@ -1,304 +1,323 @@
 <!-- loop over each movie in the array -->
 
 <div class="hero-container row">
-	<!--{{#if logged_in}}-->
-	<img id="movie_poster" src="{{movie.poster}}" >
-	{{!-- <div class="ticket__content"> --}}
-		<h1 class="ticket__movie-title" style="text-align:center">{{movie.name}}</h1>
+  <!--{{#if logged_in}}-->
+  <img id="movie_poster" src="{{movie.poster}}">
+  {{!-- <div class="ticket__content"> --}}
+    <h1 class="ticket__movie-title" style="text-align:center">{{movie.name}}</h1>
     <p></p>
-		<p class="ticket__movie-slogan movie_desc">
-			{{movie.description}}
-		</p>
+    <p class="ticket__movie-slogan movie_desc">
+      {{movie.description}}
+    </p>
     <div class="cards">
       <div class="card snake">
         <div class="inner">
           <h4>COMMUNITY RATING</h4>
           <h4>{{movie.avg}}</h4>
-          </div>
         </div>
       </div>
-      
-      <div class="card snake">
-        <div class="inner">
+    </div>
+
+    <div class="card snake">
+      <div class="inner">
+        <form class="form comment-form">
           <h5><label class="form__label" for="rating">Rating</label>
-				<input class="form__input" type="number" id="rating" name="rating" min="0" max="10" placeholder="# 0-10"></h5>
+            <input class="form__input" type="number" id="rating" name="rating" min="0" max="10" placeholder="# 0-10">
+          </h5>
           <h5><label class="form__label" for="comment">Comment</label>
-				<input class="form__input" type="text" id="comment" name="comment" placeholder="Enter comment"></h5>
-        <button id="postbtn" type="submit">Post Your Review</button>
+            <input class="form__input" type="text" id="comment" name="comment" placeholder="Enter comment">
+          </h5>
+          <button id="postbtn" type="submit">Post Your Review</button>
+        </form>
+      </div>
+    </div>
+
+    {{!--
+  </div> --}}
+  {{!-- <span class="heading">User Rating</span>
+  <p>{{user.name}} rates this movie:{{movie.avg}}</p>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <hr style="border:3px solid #f1f1f1"> --}}
+  {{!-- <form class="form comment-form">
+    <div class="form__group">
+      <label class="form__label" for="rating">Rating</label>
+      <input class="form__input" type="number" id="rating" name="rating" min="0" max="10"
+        placeholder="Enter rating number">
+    </div>
+    <div class="form__group">
+      <label class="form__label" for="comment">Comment</label>
+      <input class="form__input" type="text" id="comment" name="comment" placeholder="Enter comment">
+    </div> --}}
+    {{!-- <input type="text" id="rating-box" placeholder="Enter rating number">
+    <input type="text" id="comment-box" placeholder="Enter comment"> --}}
+    <input type="hidden" id="movie-id" value="{{movie.id}}">
+    <input type="hidden" id="user-id" value="{{user.id}}">
+    {{!-- <button id="postbtn" type="submit">Post Your Review</button> --}}
+    {{!--
+  </form> --}}
+
+
+  <ul id="unordered"></ul>
+
+  {{!-- <div class="ticket__content"> --}}
+    {{!-- {{#each movie.movieComments}}
+    <li class="comment">
+      <div class="comment__content">
+        <p class="comment__author">{{user.username}} rates this: {{rating}}</p>
+        <p class="comment__author">Their Review: {{feedback}}</p>
+      </div>
+      {{/each}} --}}
+      <div class="cards">
+        {{#each movie.movieComments}}
+        <div class="card snake">
+          <div class="inner">
+            <h2>{{user.username}} rates this: {{rating}}</p>
+              <p>Their Review: {{feedback}}</p>
           </div>
         </div>
-      
-    {{!-- </div> --}}
-		{{!-- <span class="heading">User Rating</span>
-		<p>{{user.name}} rates this movie:{{movie.avg}}</p>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star"></span>
-		<hr style="border:3px solid #f1f1f1"> --}}
-		{{!-- <form class="form comment-form">
-			<div class="form__group">
-				<label class="form__label" for="rating">Rating</label>
-				<input class="form__input" type="number" id="rating" name="rating" min="0" max="10" placeholder="Enter rating number">
-			</div>
-			<div class="form__group">
-				<label class="form__label" for="comment">Comment</label>
-				<input class="form__input" type="text" id="comment" name="comment" placeholder="Enter comment">
-			</div> --}}
-			{{!-- <input type="text" id="rating-box" placeholder="Enter rating number">
-			<input type="text" id="comment-box" placeholder="Enter comment"> --}}
-			<input type="hidden" id="movie-id" value="{{movie.id}}">
-			<input type="hidden" id="user-id" value="{{user.id}}">
-			{{!-- <button id="postbtn" type="submit">Post Your Review</button> --}}
-		{{!-- </form> --}}
-		
+        {{/each}}
+      </div>
+      {{!--
+  </div> --}}
+  <!--{{else}}-->
 
-		<ul id="unordered"></ul>
+  <div class="ticket-container">
+    <div class="ticket__content">
+      <h4 class="ticket__movie-title">{{movie.name}}</h4>
+      <p class="ticket__movie-slogan">
+        {{movie.description}}
+      </p>
+    </div>
+  </div>
+  <!--{{/if}}-->
 
-	{{!-- <div class="ticket__content"> --}}
-		{{!-- {{#each movie.movieComments}}
-		<li class="comment">
-			<div class="comment__content">
-			<p class="comment__author">{{user.username}} rates this: {{rating}}</p>
-			<p class="comment__author">Their Review: {{feedback}}</p>
-			</div>
-		{{/each}} --}}
-		<div class="cards">
-		{{#each movie.movieComments}}
-		<div class="card snake">
-			<div class="inner">
-			<h2>{{user.username}} rates this: {{rating}}</p>
-			<p>Their Review: {{feedback}}</p>
-			</div>
-		</div>
-		{{/each}}
-		</div>
-		{{!--
-	</div> --}}
-	<!--{{else}}-->
-	
-	<div class="ticket-container">
-		<div class="ticket__content">
-			<h4 class="ticket__movie-title">{{movie.name}}</h4>
-			<p class="ticket__movie-slogan">
-				{{movie.description}}
-			</p>
-		</div>
-	</div>
-	<!--{{/if}}-->
+  <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
 
-<style>
-      *,
-      *:before,
-      *:after {
-        box-sizing: inherit;
-      }
-      h1 {
-        text-decoration: underline;
-        color:#000000;
-      }
+    h1 {
+      text-decoration: underline;
+      color: #000000;
+    }
+
+    .cards {
+      column-count: 3;
+      --gap: 50px;
+      column-gap: var(--gap);
+      margin: var(--gap);
+    }
+
+    @media (max-width: 1000px) {
       .cards {
-        column-count: 3;
-        --gap: 50px;
-        column-gap: var(--gap);
-        margin: var(--gap);
+        column-count: 2;
       }
-      @media (max-width: 1000px) {
-        .cards {
-          column-count: 2;
-        }
-      }
-      @media (max-width: 600px) {
-        .cards {
-          column-count: 1;
-        }
-      }
+    }
 
-      #movie_poster {
-        width: 100%;
-        
+    @media (max-width: 600px) {
+      .cards {
+        column-count: 1;
       }
-      .movie_desc {
-        color:rgba(224, 224, 224, 0.863);
-        font-size: 2rem;
-        font-weight: 300;
-        line-height: 1.5;
-        margin: 0;
-        border-style: dashed;
-        border-width: 3px;
-        border-color: #000000;
-        background-color: #457fb4;
-        box-shadow: 0 0 0 0.4em #457fb4, 0 0 0 0.5em #000000;
-        padding: 5px;
+    }
 
-      }
-      .card {
-        --yellow: #ffc600;
-        --pink: #ff3f8e;
-        --color1: var(--yellow);
-        --color2: var(--pink);
-        --inline: 10px;
-        --block: 0;
-        --duration: 150ms;
-        --padding: 4px;
-        --border: 1px;
-        --radius: 20px;
-        box-shadow: inset 0 0 0 var(--border) grey;
-        padding: var(--padding);
-        border-radius: calc(var(--radius) + var(--padding));
-        overflow: hidden;
-        display: grid;
-        margin-bottom: var(--gap);
-        cursor: pointer;
-      }
+    #movie_poster {
+      width: 100%;
 
-      .inner {
-        background: #457fb4;
-        z-index: 2;
-        padding: 20px;
-        border-radius: var(--radius);
-      }
+    }
 
-      .card button {
-        display: block;
-        width: 100%;
-        border: 0;
-        color: white;
-        padding: 10px;
-        position: relative;
-        border-radius: var(--radius);
-        background: #457fb4;
-        font-weight: 900;
-        font-size: 15px;
-      }
-      .card button:before {
-        content: "";
-        display: block;
-        width: calc(100% + 2px);
-        height: calc(100% + 2px);
-        position: absolute;
-        top: -1px;
-        left: -1px;
-        z-index: -1;
-        border-radius: var(--radius);
-        background: linear-gradient(45deg, var(--color2), var(--color1));
-      }
+    .movie_desc {
+      color: rgba(224, 224, 224, 0.863);
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.5;
+      margin: 0;
+      border-style: dashed;
+      border-width: 3px;
+      border-color: #000000;
+      background-color: #457fb4;
+      box-shadow: 0 0 0 0.4em #457fb4, 0 0 0 0.5em #000000;
+      padding: 5px;
 
-      .tail {
-        transition: all var(--duration);
-        width: var(--inline);
-        height: var(--block);
-        background: var(--color1);
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-      }
+    }
 
-      .tail.top {
-        background-image: linear-gradient(to right, var(--color1), var(--color2));
-        height: var(--inline);
-        width: var(--block);
-        transition-delay: calc(var(--duration) * 2);
-      }
+    .card {
+      --yellow: #ffc600;
+      --pink: #ff3f8e;
+      --color1: var(--yellow);
+      --color2: var(--pink);
+      --inline: 10px;
+      --block: 0;
+      --duration: 150ms;
+      --padding: 4px;
+      --border: 1px;
+      --radius: 20px;
+      box-shadow: inset 0 0 0 var(--border) grey;
+      padding: var(--padding);
+      border-radius: calc(var(--radius) + var(--padding));
+      overflow: hidden;
+      display: grid;
+      margin-bottom: var(--gap);
+      cursor: pointer;
+    }
 
-      .tail.right {
-        right: 0;
-        left: unset;
-        background: var(--color2);
-        transition-delay: var(--duration);
-      }
+    .inner {
+      background: #457fb4;
+      z-index: 2;
+      padding: 20px;
+      border-radius: var(--radius);
+    }
 
-      .tail.bottom {
-        height: var(--inline);
-        width: var(--block);
-        bottom: 0;
-        right: 0;
-        left: unset;
-        top: unset;
-        background-image: linear-gradient(to right, var(--color1), var(--color2));
-        transition-delay: 0ms;
-      }
+    .card button {
+      display: block;
+      width: 100%;
+      border: 0;
+      color: white;
+      padding: 10px;
+      position: relative;
+      border-radius: var(--radius);
+      background: #457fb4;
+      font-weight: 900;
+      font-size: 15px;
+    }
 
-      .tail.left {
-        bottom: 0;
-        top: unset;
-        transition-delay: calc(var(--duration) * 3);
-      }
+    .card button:before {
+      content: "";
+      display: block;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      z-index: -1;
+      border-radius: var(--radius);
+      background: linear-gradient(45deg, var(--color2), var(--color1));
+    }
 
-      .snake:where(.start, :hover) .tail.top {
-        transition-delay: var(--duration);
-      }
-      .snake:where(.start, :hover) .tail.right {
-        transition-delay: calc(var(--duration) * 2);
-      }
-      .snake:where(.start, :hover) .tail.bottom {
-        transition-delay: calc(var(--duration) * 3);
-      }
-      .snake:where(.start, :hover) .tail.left {
-        transition-delay: 0ms;
-      }
+    .tail {
+      transition: all var(--duration);
+      width: var(--inline);
+      height: var(--block);
+      background: var(--color1);
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+    }
 
-      .snake {
-        position: relative;
-      }
+    .tail.top {
+      background-image: linear-gradient(to right, var(--color1), var(--color2));
+      height: var(--inline);
+      width: var(--block);
+      transition-delay: calc(var(--duration) * 2);
+    }
 
-      .snake.start .tail {
-        --block: 0;
-      }
-      .snake:hover .tail {
-        --block: 100%;
-      }
+    .tail.right {
+      right: 0;
+      left: unset;
+      background: var(--color2);
+      transition-delay: var(--duration);
+    }
 
-      p {
-        line-height: 1.6;
-      }
-      h2 {
-        margin: 0;
-        text-align: center;
-      }
+    .tail.bottom {
+      height: var(--inline);
+      width: var(--block);
+      bottom: 0;
+      right: 0;
+      left: unset;
+      top: unset;
+      background-image: linear-gradient(to right, var(--color1), var(--color2));
+      transition-delay: 0ms;
+    }
 
-      h2:after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: var(--padding);
-        border-radius: 2px;
-        background: linear-gradient(to right, var(--color1), var(--color2));
-        margin-top: 10px;
-      }
-    </style>
+    .tail.left {
+      bottom: 0;
+      top: unset;
+      transition-delay: calc(var(--duration) * 3);
+    }
 
-	<script>
-      const cards = document.querySelectorAll(`.card`);
-      // Add the tails to each card
+    .snake:where(.start, :hover) .tail.top {
+      transition-delay: var(--duration);
+    }
+
+    .snake:where(.start, :hover) .tail.right {
+      transition-delay: calc(var(--duration) * 2);
+    }
+
+    .snake:where(.start, :hover) .tail.bottom {
+      transition-delay: calc(var(--duration) * 3);
+    }
+
+    .snake:where(.start, :hover) .tail.left {
+      transition-delay: 0ms;
+    }
+
+    .snake {
+      position: relative;
+    }
+
+    .snake.start .tail {
+      --block: 0;
+    }
+
+    .snake:hover .tail {
+      --block: 100%;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    h2 {
+      margin: 0;
+      text-align: center;
+    }
+
+    h2:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: var(--padding);
+      border-radius: 2px;
+      background: linear-gradient(to right, var(--color1), var(--color2));
+      margin-top: 10px;
+    }
+  </style>
+
+  <script>
+    const cards = document.querySelectorAll(`.card`);
+    // Add the tails to each card
+    cards.forEach((card) => {
+      [
+        `top`,
+        `right`,
+        `bottom`,
+        `left`,
+      ].forEach((side) => {
+        const tail = document.createElement(`div`);
+        tail.classList.add(`tail`, side);
+        card.appendChild(tail);
+      });
+      // if that card has no colours, add some
+      if (!card.style.getPropertyValue(`--color1`)) {
+        card.style.setProperty(`--color1`, `hsl(${Math.random() * 360}, 100%, 50%)`);
+        card.style.setProperty(`--color2`, `hsl(${Math.random() * 360}, 100%, 50%)`);
+      }
+    });
+
+    setInterval(() => {
       cards.forEach((card) => {
-        [
-          `top`,
-          `right`,
-          `bottom`,
-          `left`,
-        ].forEach((side) => {
-          const tail = document.createElement(`div`);
-          tail.classList.add(`tail`, side);
-          card.appendChild(tail);
-        });
-        // if that card has no colours, add some
         if (!card.style.getPropertyValue(`--color1`)) {
           card.style.setProperty(`--color1`, `hsl(${Math.random() * 360}, 100%, 50%)`);
           card.style.setProperty(`--color2`, `hsl(${Math.random() * 360}, 100%, 50%)`);
         }
       });
+    }, 7000);
+  </script>
 
-      setInterval(() => {
-        cards.forEach((card) => {
-          if (!card.style.getPropertyValue(`--color1`)) {
-            card.style.setProperty(`--color1`, `hsl(${Math.random() * 360}, 100%, 50%)`);
-            card.style.setProperty(`--color2`, `hsl(${Math.random() * 360}, 100%, 50%)`);
-          }
-        });
-      }, 7000);
-    </script>
-
-	<script src="/js/post.js"></script>
+  <script src="/js/post.js"></script>

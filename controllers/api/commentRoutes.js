@@ -6,11 +6,13 @@ new chalk.Instance({ level: 3 });
 
 //GET all comments
 router.get("/", async (req, res) => {
+
   try {
     const commentData = await Comment.findAll({
       // where: {
       //     user_id: req.session.user_id,
       // },
+
 
       include: [
         {
@@ -76,6 +78,7 @@ router.post("/", withAuth, async (req, res) => {
       user_id: req.session.user_id,
     });
 
+
     res.status(200).json(newComment);
   } catch (err) {
     res.status(500).json(err);
@@ -126,6 +129,7 @@ router.delete("/:id", withAuth, async (req, res) => {
       console.log(chalk.bgYellow("No comment found with this id!"));
       res.status(404).json({ message: "No comment found with this id!" });
       return;
+
     }
     console.log(chalk.bgGreen("Comment deleted successfully!"));
     res.status(200).json({ message: "Comment deleted successfully!" });

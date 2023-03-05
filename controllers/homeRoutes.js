@@ -3,6 +3,7 @@ const{ Movie, User, Comment } = require('../models');
 const chalk = require('chalk');
 new chalk.Instance({level: 3});
 const withAuth = require('../utils/auth');
+const sequelize = require('../config/connection');
 
 //route to get all movies
 router.get("/", async (req, res) => {
@@ -44,14 +45,30 @@ try {
              
             {
                 model: Comment, as : "movieComments",
-                attributes: ["id", "feedback", "rating", "user_id"],
+                attributes: [ "id", "feedback", "rating", "user_id"  ],
+                
+           
                 include: {
+                
                     model: User,
-                    attributes: ["username"]
-                }
+                    attributes: ["username"],
+                },
+                
+                //model: Comment, as : "movieComments",
+                //attributes: ["movie_id", "rating"],
+                //include: 
+                    
+                    //sequelize.literal(`(SELECT AVG(rating) FROM comment WHERE movie_id = ${req.params.id}) AS average_rating`),
+                    
+                
             },
-          
-        ]
+            //find average movie rating from comments
+            // (sequelize.literal(`(SELECT AVG(rating) FROM comment WHERE movie_id = ${req.params.id}) AS average_rating`))
+
+     
+            
+            
+        ],
     })
     
     if(movieData) {

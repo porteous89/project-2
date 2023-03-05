@@ -70,6 +70,7 @@ try {
             
         ],
     })
+    
     if(movieData) {
      const movie = movieData.get({ plain: true });
      res.render("movies", { movie, logged_in: req.session.loggedIn });
@@ -96,8 +97,22 @@ router.get("/login", (req, res) => {
 router.get("/profile", async (req, res) => {
     try {
         const userData = await User.findByPk( req.session.user_id );
+        const commentData = await Comment.findAll({
+             where: {
+                 user_id: req.session.user_id,
+             },
+             include: [
+                {
+                    model: Movie,
+                    attributes: ["name"],
+                }
+             ]
+        });
+
+        const comments = commentData.map((comment) => comment.get({ plain: true }));
+
         const user = userData.get({ plain: true });
-        res.render('profile', { user });
+        res.render('profile', { user, comments, logged_in: req.session.loggedIn});
     } catch (err) {
         console.log(chalk.bgRed(err));
         res.status(500).json(err);

@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
         const commentData = await Comment.findAll({
             // where: {
             //     user_id: req.session.user_id,
-            // },
 
             include: [
                 { 
@@ -70,44 +69,38 @@ router.get("/:id", async (req, res) => {
 router.post('/', withAuth, async (req, res) => {
     try {
       const newComment = await Comment.create({
-      content: req.body.content,
-        user_id: req.session.user_id,
+        ...req.body,
+         user_id: req.session.user_id,
+        
       });
-    
+      console.table(newComment);
       res.status(200).json(newComment);
     } catch (err) {
-      res.status(500).json(e
+        console.log(chalk.bgRed(err));
+      res.status(400).json(err);
     }
   });
 
 //PUT to update a comment
 router.put("/:id", withAuth, async (req, res) => {
     try {
-        const commentData = await Comment.update(
-            {
-            content: req.body.content,
-            },
-            {
+        const commentData = await Comment.update(req.body, {
             where: {
                 id: req.params.id,
-                user_id: req.session.user_id,
             },
         });
-        res.status(200).json(commentData);
+        if (!commentData[0]) {
+            console.log(chalk.bgYellow("No comment found with this id!"));
+            res.status(404).json({ message: "No comment found with this id!" });
+            return;
+        }
+        console.log(chalk.bgGreen("Comment updated successfully!"));
+        res.status(200).json({ message: "Comment updated successfully!" });
     } catch (err) {
+        console.log(chalk.bgRed(err));
         res.status(500).json(err);
-    }});
-    //     if (!commentData[0]) {
-    //         console.log(chalk.bgYellow("No comment found with this id!"));
-    //         res.status(404).json({ message: "No comment found with this id!" });
-    //         return;
-    //     }
-    //     console.log(chalk.bgGreen("Comment updated successfully!"));
-    //     res.status(200).json({ message: "Comment updated successfully!" });
-    // } catch (err) {
-    //     console.log(chalk.bgRed(err));
-    //     res.status(500).json(err);
-    // }
+    }
+});
 
 //DELETE a comment by ID
 router.delete("/:id", withAuth, async (req, res) => {
@@ -115,7 +108,6 @@ router.delete("/:id", withAuth, async (req, res) => {
         const commentData = await Comment.destroy({
             where: {
                 id: req.params.id,
-                user_id: req.session.user_id,
             },
         });
         if (!commentData) {

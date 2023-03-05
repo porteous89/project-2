@@ -1,5 +1,6 @@
 const postFormHandler = async (event) => {
     event.preventDefault();
+
     const rating = document.querySelector('#rating-box').value.trim();
     const feedback = document.querySelector('#comment-box').value.trim();
     const movieId = document.querySelector('#movie-id').value.trim();
@@ -10,16 +11,22 @@ const postFormHandler = async (event) => {
             method: 'POST',
             body: JSON.stringify({ rating, feedback, movie_id: movieId, user_id: userId }),
             headers: { 'Content-Type': 'application/json' },
+            
         });
+        console.log(response);
+       
         if (response.ok) {
-            document.location.replace('/profile');
+          
         } else {
+            console.log(response.statusText);
             alert(response.statusText);
         }
     }
-}
+// }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('post');
-    form.addEventListener('submit', postFormHandler);
-});
+//addevent listener for submit buttun with prevent default
+
+document.querySelector('.comment-form').addEventListener('submit', postFormHandler,
+    );
+
+

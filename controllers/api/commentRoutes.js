@@ -65,6 +65,8 @@ router.get("/:id", async (req, res) => {
 //     }
 // });
 
+
+
 router.post('/', withAuth, async (req, res) => {
     try {
       const newComment = await Comment.create({
@@ -74,7 +76,7 @@ router.post('/', withAuth, async (req, res) => {
     
       res.status(200).json(newComment);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json(e
     }
   });
 

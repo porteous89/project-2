@@ -2,6 +2,7 @@ const router = require('express').Router();
 const{ Movie, User, Comment } = require('../models');
 const chalk = require('chalk');
 new chalk.Instance({level: 3});
+const withAuth = require('../utils/auth');
 
 //route to get all movies
 router.get("/", async (req, res) => {
@@ -20,6 +21,20 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
  }
 });
+
+router.post('/', withAuth, async (req, res) => {
+    try {
+      const newComment = await Comment.create({
+        ...req.body,
+        // user_id: req.session.user_id,
+      });
+      console.table(newComment);
+      res.status(200).json(newComment);
+    } catch (err) {
+        console.log(chalk.bgRed(err));
+      res.status(400).json(err);
+    }
+  });
 
 //route to get a movie with all comments and username
 router.get("/movie/:id", async (req, res) => { 

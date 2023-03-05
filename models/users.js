@@ -47,6 +47,7 @@ User.init (
                 userData.forEach((user) => {
                     console.table(user);
                     user.dataValues.password = bcrypt.hashSync(user.password, 10);
+                    console.table(user);
                 })
                 return userData;
             },

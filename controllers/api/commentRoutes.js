@@ -65,15 +65,19 @@ router.get("/:id", async (req, res) => {
 //     }
 // });
 
+
+
 router.post('/', withAuth, async (req, res) => {
     try {
       const newComment = await Comment.create({
         ...req.body,
-        user_id: req.session.user_id,
+         user_id: req.session.user_id,
+        
       });
-  
+      console.table(newComment);
       res.status(200).json(newComment);
     } catch (err) {
+        console.log(chalk.bgRed(err));
       res.status(400).json(err);
     }
   });

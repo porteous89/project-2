@@ -15,11 +15,22 @@
 		<span class="fa fa-star checked"></span>
 		<span class="fa fa-star"></span>
 		<hr style="border:3px solid #f1f1f1">
-		<form class="form post-form">
-			<input type="text" id="rating-box" placeholder="Enter rating number">
-			<input type="text" id="comment-box" placeholder="Enter comment">
+		<form class="form comment-form">
+			<div class="form__group">
+				<label class="form__label" for="rating">Rating</label>
+				<input class="form__input" type="number" id="rating" name="rating" placeholder="Enter rating number">
+			</div>
+			<div class="form__group">
+				<label class="form__label" for="comment">Comment</label>
+				<input class="form__input" type="text" id="comment" name="comment" placeholder="Enter comment">
+			</div>
+			{{!-- <input type="text" id="rating-box" placeholder="Enter rating number">
+			<input type="text" id="comment-box" placeholder="Enter comment"> --}}
+			<input type="hidden" id="movie-id" value="{{movie.id}}">
+			<input type="hidden" id="user-id" value="{{user.id}}">
+			<button id="postbtn" type="submit">Post</button>
 		</form>
-		<button id="post">Post</button>
+		
 		<ul id="unordered"></ul>
 
 	{{!-- <div class="ticket__content"> --}}
@@ -44,4 +55,4 @@
 	</div>
 	{{/if}}
 
-	<script src="./js/post.js"></script>
+	<script src="/js/post.js"></script>

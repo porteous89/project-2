@@ -63,7 +63,7 @@ THEN I am signed out of the site
 Click [here](https://project-2-fresh-tomatoes.herokuapp.com/) for the deployed link through Heroku.
 #
 ## Presentation
-click .[here](https://docs.google.com/presentation/d/1KA0yLQmZFV984IVncTodaIq3ErpneIYB6p7PQzqNyWU/edit?usp=sharing) for our Presentation.
+click [here](https://docs.google.com/presentation/d/1KA0yLQmZFV984IVncTodaIq3ErpneIYB6p7PQzqNyWU/edit?usp=sharing) for our Presentation.
 #
 ## Installation
 - Clone or Dowload as a zip file via Github

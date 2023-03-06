@@ -60,7 +60,7 @@ THEN I am signed out of the site
 - Must protect API keys and sensitive information with environment variables
 #
 ## Deployed link 
-Click [here]() for the deployed link through Heroku.
+Click [here](https://project-2-fresh-tomatoes.herokuapp.com/) for the deployed link through Heroku.
 #
 ## Installation
 - Clone or Dowload as a zip file via Github
@@ -72,14 +72,24 @@ Click [here]() for the deployed link through Heroku.
 - Lastly, put in "node seeds" to seed the data.
 - Simply enter "npm start" to execute file.
 - Go to your browser and type in 'localhost:3001'.
+![screenshot](./public/assets/screen1.png)
+![screenshot](./public/assets/screen2.png)
+![screenshot](./public/assets/screen3.png)
+![screenshot](./public/assets/screen4.png)
+
+The last screen shows Chalk being used in development.
+
 #
 ## License 
 ![badge](https://img.shields.io/badge/license-MIT-orange) 
 #
 
 ## Collaborators
-Alister Porteous
+Alister Porteous Email: alisterporteous@hotmail.com
+Github: https://github.com/porteous89
 
-Nav Aulakh
+Nav Aulakh Email: navdeep_aulakh24@hotmail.com
+Github: https://github.com/navaulakh24
 
-Tamas Pinter
+Tamas Pinter Email: brolli_673@hotmail.com
+Github: https://github.com/TamasPinter
